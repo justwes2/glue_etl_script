@@ -39,18 +39,18 @@ billing_tmp = DynamicFrame.fromDF(billing_df, glueContext, "nested")
 # Rename, case, and nest with apply_mapping
 billing_nest = billing_tmp.apply_mapping(
 #unclear how to use apply_mapping
-# LinkedAccountId
-# BillingPeriodStartDate
-# BillingPeriodEndDate
-# LinkedAccountName
-# ProductCode
-# ProductName
-# UsageType
-# UsageStartDate
-# UsageEndDate
-# UsageQuantity
-# BlendedRate
-# TotalCost
+# LinkedAccountId- string
+# BillingPeriodStartDate- string
+# BillingPeriodEndDate- string
+# LinkedAccountName- string
+# ProductCode- string
+# ProductName- string
+# UsageType-  string
+# UsageStartDate- string
+# UsageEndDate- string
+# UsageQuantity- float (or should it be int?)
+# BlendedRate- float
+# TotalCost- float
 # user:Application clean up tags, harmonize with required tags
 # user:Application Group
 # user:BillingCode
