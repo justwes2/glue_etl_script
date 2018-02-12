@@ -23,4 +23,42 @@ billing_dyf = glueContext.create_dynamic_frame.from_catalog(database = db_name, 
 
 # Remove erroneous records
 billing_df = billling_res.toDF()
-billing_df = billing_df.where("`provider id` is NOT NULL")
+billing_df = billing_df.where("`TotalCost` is INTEGER")
+
+# Convert dates into standard format that can be consumed (YY/MM/DD)
+# BillingPeriodStartDate
+# BillingPeriodEndDate
+# UsageStartDate
+# UsageEndDate
+
+# breaks: /,/, ,:
+
+#  Turn it back to a dynamic frame
+billing_tmp = DynamicFrame.fromDF(billing_df, glueContext, "nested")
+
+# Rename, case, and nest with apply_mapping
+billing_nest = billing_tmp.apply_mapping(
+#unclear how to use apply_mapping
+# LinkedAccountId
+# BillingPeriodStartDate
+# BillingPeriodEndDate
+# LinkedAccountName
+# ProductCode
+# ProductName
+# UsageType
+# UsageStartDate
+# UsageEndDate
+# UsageQuantity
+# BlendedRate
+# TotalCost
+# user:Application clean up tags, harmonize with required tags
+# user:Application Group
+# user:BillingCode
+# user:Environment
+# user:Name
+# user:Portfolio
+# user:ResourceType
+)
+
+# Write it out in Parquet (what's parquet)
+glueContext.write_dynamic_frame.from_options(frame = billing_nest, connection_type = "s3", connection_options = {"path": output_dir}, format = "parquet")
